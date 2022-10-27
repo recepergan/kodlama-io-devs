@@ -17,7 +17,8 @@ public class InMemoryLanguageRepository implements LanguageRepository<Language> 
 	
 	public InMemoryLanguageRepository() {
 		languages = new ArrayList<Language>();
-		languages.add(new Language(1, "C#"));
+		languages.add(new Language(0, "C#"));
+		languages.add(new Language(1, "Python"));
 		languages.add(new Language(2, "Java"));
 		languages.add(new Language(3, "Python"));
 		languages.add(new Language(4, "Python"));
@@ -34,8 +35,8 @@ public class InMemoryLanguageRepository implements LanguageRepository<Language> 
 
 	@Override
 	public Language findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Language findLanguage =languages.get(id);
+		return findLanguage;
 	}
 
 	@Override
