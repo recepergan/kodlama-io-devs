@@ -10,9 +10,17 @@ public interface LanguageService {
 	
 	List<GetAllLanguageResponse> findAll();
 	
+	GetAllLanguageResponse findAllId(int id);
+	
 	void add(CreateLanguageRequest createLanguageRequest);
 
-	Language update(GetAllLanguageResponse getAllLanguageResponse);
+	void update(CreateLanguageRequest createLanguageRequest, int id) throws Exception;
+
+	
+
+//	Language delete(GetAllLanguageResponse getAllLanguageResponse);	
+
+	
 	
 	
 

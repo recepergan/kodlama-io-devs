@@ -3,8 +3,6 @@ package kodlama.io.devs.business.concretes;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.UnsupportedLookAndFeelException;
-
 import org.springframework.stereotype.Service;
 
 import kodlama.io.devs.business.abstracts.LanguageService;
@@ -40,6 +38,18 @@ public class LanguageServiceImpl implements LanguageService {
 	}
 
 	@Override
+	public GetAllLanguageResponse findAllId(int id) {
+		Language language = languageRepository.findById(id);
+		GetAllLanguageResponse languageResponse = new GetAllLanguageResponse();
+
+		languageResponse.setId(language.getId());
+		languageResponse.setName(language.getName());
+
+		return languageResponse;
+
+	}
+
+	@Override
 	public void add(CreateLanguageRequest createLanguageRequest) {
 
 		Language language = new Language();
@@ -50,15 +60,42 @@ public class LanguageServiceImpl implements LanguageService {
 	}
 
 	@Override
-	public Language update(GetAllLanguageResponse getAllLanguageResponse) {
+	public void update(CreateLanguageRequest createLanguageRequest,int id) throws Exception {
 
+		checkNameValid(createLanguageRequest.getName());
 		// TODO Auto-generated method stub
-		Language language = new Language();
+		Language language = languageRepository.findById(id);
+		language.setName(createLanguageRequest.getName());
+		languageRepository.save(language);
+	}
 
-		language.setName(getAllLanguageResponse.getName());
-		language.setId(getAllLanguageResponse.getId());
-		
-		return languageRepository.save(language);
+	private void checkNameValid(String name) throws Exception {
+		// TODO Auto-generated method stub
+		 Language isExist = languageRepository.findByName(name);
+		 	if (isExist != null){
+	            throw new Exception("This name already exist!");
+	        }
+	        if (name.isBlank()){
+	            throw new Exception("Name can't be null");
+	        }
 	}
 
 }
+
+//	@Override
+//	public void delete(GetAllLanguageResponse getAllLanguageResponse) {
+//		// TODO Auto-generated method stub
+//		Language language = new Language();
+//
+//		language.setName(getAllLanguageResponse.getName());
+//		language.setId(getAllLanguageResponse.getId());
+//		
+//		
+//
+//}
+
+//	@Override
+//	public Language delete(GetAllLanguageResponse getAllLanguageResponse) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
