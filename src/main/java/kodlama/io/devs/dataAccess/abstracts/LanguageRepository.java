@@ -9,9 +9,10 @@ public interface LanguageRepository<T> {
 	
 	List<T> findAll();
 	T findById(int id);
-	void saveToDatabase(T object);
+	T saveToDatabase(T object);
 	void deleteFromDatabase(int id);
 	void updateOnDAtabase(T object, int id);
+	Language save(Language language);
 	
 	
 	

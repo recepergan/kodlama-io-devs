@@ -5,10 +5,10 @@ import java.util.List;
 public interface LanguageService<T> {
 	
 	List<T> findAll();
-	T findById(int id);
-	T save(T object);
+	T findById(int id) throws Exception;
+	T save(T object) throws Exception;
     void deleteById(int id);
-    T update(T object);
+    void update(T object, int id);
 	
 	
 

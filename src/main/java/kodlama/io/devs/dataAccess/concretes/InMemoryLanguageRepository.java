@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.swing.BoundedRangeModel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import kodlama.io.devs.dataAccess.abstracts.LanguageRepository;
@@ -12,6 +14,9 @@ import kodlama.io.devs.entities.concretes.Language;
 
 @Repository
 public class InMemoryLanguageRepository implements LanguageRepository<Language> {
+	
+	 private static final  Logger logger = LoggerFactory.getLogger(InMemoryLanguageRepository.class);
+	
 
 	ArrayList<Language> languages;
 	
@@ -35,15 +40,18 @@ public class InMemoryLanguageRepository implements LanguageRepository<Language> 
 
 	@Override
 	public Language findById(int id) {
-		Language findLanguage =languages.get(id);
-		return findLanguage;
+		return languages.stream().filter(language -> language.getId()==id).findFirst().get();
 	}
 
 	@Override
-	public void saveToDatabase(Language object) {
-		// TODO Auto-generated method stub
+	public Language saveToDatabase(Language language) {
+		logger.info("Language saveToDatabadse ...");
+
+			languages.add(language);
+			return findById(language.getId());
 		
 	}
+	
 
 	@Override
 	public void deleteFromDatabase(int id) {
@@ -52,9 +60,22 @@ public class InMemoryLanguageRepository implements LanguageRepository<Language> 
 	}
 
 	@Override
-	public void updateOnDAtabase(Language object, int id) {
-		// TODO Auto-generated method stub
+	public void updateOnDAtabase(Language language, int id) {
 		
+		Language updateLanguage = findById(id);
+		
+		updateLanguage.setName(language.getName());
+		
+	}
+
+
+	
+
+
+	@Override
+	public Language save(Language language) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
