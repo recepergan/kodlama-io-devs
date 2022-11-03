@@ -2,18 +2,14 @@ package kodlama.io.devs.dataAccess.abstracts;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import kodlama.io.devs.entities.concretes.Language;
 
 //CRUD --> Create, Read, Update, Delete
-public interface LanguageRepository<T> {
+public interface LanguageRepository extends JpaRepository<Language, Integer> {
 	
-	List<T> findAll();
-	T findById(int id);
-	T saveToDatabase(T object);
-	void deleteFromDatabase(int id);
-	void updateOnDAtabase(T object, int id);
-	Language save(Language language);
-	
+
 	
 	
 

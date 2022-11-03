@@ -2,13 +2,14 @@ package kodlama.io.devs.business.abstracts;
 
 import java.util.List;
 
-public interface LanguageService<T> {
+import kodlama.io.devs.business.requests.CreateLanguageRequest;
+import kodlama.io.devs.business.responses.GetAllLanguageResponse;
+
+public interface LanguageService {
 	
-	List<T> findAll();
-	T findById(int id) throws Exception;
-	T save(T object) throws Exception;
-    void deleteById(int id);
-    void update(T object, int id);
+	List<GetAllLanguageResponse> findAll();
+	
+	void add(CreateLanguageRequest createLanguageRequest);
 	
 	
 
