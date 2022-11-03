@@ -57,11 +57,13 @@ public class LanguageController {
 
 		languageService.update(createLanguageRequest,id);
 	}
-//	@DeleteMapping("/delete/{id}")
-//	public ResponseEntity<Language> deleteLanguage(@RequestBody GetAllLanguageResponse getAllLanguageResponse, @PathVariable int id) {
-//		return new ResponseEntity<Language>(languageService.delete(getAllLanguageResponse),HttpStatus.OK);
-//		
-//	}
+	
+	@DeleteMapping("/delete/{id}")
+	public void deleteLanguage(@PathVariable int id) {
+		
+		languageService.delete(id);
+		
+	}
 	
 	
 	

@@ -60,7 +60,7 @@ public class LanguageServiceImpl implements LanguageService {
 	}
 
 	@Override
-	public void update(CreateLanguageRequest createLanguageRequest,int id) throws Exception {
+	public void update(CreateLanguageRequest createLanguageRequest, int id) throws Exception {
 
 		checkNameValid(createLanguageRequest.getName());
 		// TODO Auto-generated method stub
@@ -71,31 +71,19 @@ public class LanguageServiceImpl implements LanguageService {
 
 	private void checkNameValid(String name) throws Exception {
 		// TODO Auto-generated method stub
-		 Language isExist = languageRepository.findByName(name);
-		 	if (isExist != null){
-	            throw new Exception("This name already exist!");
-	        }
-	        if (name.isBlank()){
-	            throw new Exception("Name can't be null");
-	        }
+		Language isExist = languageRepository.findByName(name);
+		if (isExist != null) {
+			throw new Exception("This name already exist!");
+		}
+		if (name.isBlank()) {
+			throw new Exception("Name can't be null");
+		}
 	}
 
+	@Override
+	public void delete(int id) {
+
+		languageRepository.deleteById(id);
+
+	}
 }
-
-//	@Override
-//	public void delete(GetAllLanguageResponse getAllLanguageResponse) {
-//		// TODO Auto-generated method stub
-//		Language language = new Language();
-//
-//		language.setName(getAllLanguageResponse.getName());
-//		language.setId(getAllLanguageResponse.getId());
-//		
-//		
-//
-//}
-
-//	@Override
-//	public Language delete(GetAllLanguageResponse getAllLanguageResponse) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
